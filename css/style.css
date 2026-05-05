@@ -118,7 +118,7 @@
 
 @media (max-width: 768px) {
   .corner-toggle-container {
-    bottom: 5rem;
+    bottom: 5rem; 
     right: 1.5rem;
   }
 }

@@ -1,0 +1,84 @@
+/* css/alegere-simulator.css */
+
+/* ÎNLOCUIEȘTE REGULA VECHE PENTRU .CHOICE-SECTION CU ACEASTA: */
+
+/* --- CONTAINERUL PRINCIPAL AL PAGINII (ACUM TAG-UL <main>) --- */
+main.choice-section {
+  /* Această regulă îi spune secțiunii principale să crească 
+     și să ocupe tot spațiul gol dintre header și footer. */
+  flex: 1;
+
+  /* Aceste reguli vor centra perfect conținutul în spațiul disponibil */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+/* --- CONTAINERUL CARE GRUPEAZĂ PANOURILE --- */
+.panels-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap; /* Pe ecrane mici, panourile trec unul sub celălalt */
+  justify-content: center; /* Asigură centrarea chiar și când e un singur rând */
+  width: 100%;
+  max-width: 900px; /* Lățimea maximă a containerului */
+}
+
+/* --- STILUL PENTRU FIECARE PANOU ÎN PARTE --- */
+.choice-panel {
+  flex-basis: 350px; /* Lățimea de bază a fiecărui panou */
+  /* FĂRĂ 'flex-grow: 1', pentru a nu se întinde */
+  max-width: 100%; /* Previne depășirea pe ecrane foarte mici */
+  
+  padding: 2rem;
+  text-align: center;
+  
+  /* Folosim flexbox pentru a alinia conținutul intern (butonul la bază) */
+  display: flex;
+  flex-direction: column;
+}
+
+.choice-panel h2 {
+  margin-bottom: 1rem;
+}
+
+.choice-panel p {
+  flex-grow: 1; /* Împinge paragraful să ocupe spațiu, împingând butonul în jos */
+  margin-bottom: 2rem;
+}
+
+.choice-panel .glass-button {
+  text-decoration: none;
+  display: inline-block;
+  margin-top: auto; /* Aliniază butonul la baza panoului */
+}
+
+/* --- ANIMAȚIA DE ÎNCĂRCARE A PAGINII --- */
+
+/* 1. Definim animația "fadeInUp" */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px); /* Poziția de start (mai jos) */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);   /* Poziția finală (normală) */
+  }
+}
+
+/* 2. Aplicăm animația pe elementele dorite */
+.fade-in-up {
+  /* Starea inițială (invizibil) pentru a nu apărea brusc */
+  opacity: 0;
+  
+  /* Setările animației */
+  animation-name: fadeInUp;
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  
+  /* Asigură că elementul rămâne vizibil după terminarea animației */
+  animation-fill-mode: forwards;
+}

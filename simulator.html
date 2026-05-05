@@ -1,0 +1,87 @@
+<!-- simulator.html (VERSIUNEA FINALĂ ȘI CURATĂ) -->
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulator Simplu Fotografie</title>
+<link rel="icon" type="image/x-icon" href="/assets/icons/camera.ico">
+<link rel="stylesheet" href="css/shared.css">
+<link rel="stylesheet" href="css/simulator.css">
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <h1>Simulator Simplu</h1>
+    <nav id="navMenu">
+      <a href="index.html" class="nav-link">Acasă</a>
+      <a href="alege-simulator.html" class="nav-link">Simulator</a>
+      <a href="galerie.html" class="nav-link">Galerie</a>
+      <a href="teorie.html" class="nav-link">Teorie</a>
+    </nav>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+  </div>
+</header>
+
+<main class="simulator-section">
+
+  <!-- CARD 1: SHUTTER SPEED -->
+  <div class="photo-card">
+    <h3>Shutter Speed</h3>
+    <div class="image-container glass-panel">
+      <img src="assets/img/photo1/normal.webp" class="base-photo" id="base1" alt="Imagine normală">
+      <img src="assets/img/photo1/overexposed.webp" class="overlay" id="shutterOverlay1" alt="Imagine supraexpusă">
+      <img src="assets/img/photo1/nd.webp" class="overlay" id="shutterNDOverlay1" alt="Imagine cu filtru ND">
+    </div>
+    <div class="controls glass-panel">
+      <label>Shutter Speed: <span id="shutterValue1">1/60</span></label>
+      <input type="range" id="shutter1" min="0" max="10" step="1" value="6" class="slider">
+      <label class="switch">
+        ND Filter
+        <input type="checkbox" id="ndFilter1">
+        <span class="slider-toggle"></span>
+      </label>
+    </div>
+    <p class="info-text glass-panel">Imaginea se modifică în funcție de viteza obturatorului și filtrul ND.</p>
+  </div>
+
+  <!-- CARD 2: ISO -->
+  <div class="photo-card">
+    <h3>ISO</h3>
+    <div class="image-container glass-panel">
+      <img src="assets/img/photo2/normal.webp" class="base-photo" id="base2" alt="Imagine normală">
+      <img src="assets/img/photo2/grain.webp" class="overlay" id="isoOverlay2" alt="Imagine cu granulație">
+    </div>
+    <div class="controls glass-panel">
+      <label>ISO: <span id="isoValue2">100</span></label>
+      <input type="range" id="iso2" min="0" max="5" step="1" value="0" class="slider">
+    </div>
+    <p class="info-text glass-panel">Imaginea primește efect de granulație la valori mari ISO.</p>
+  </div>
+
+  <!-- CARD 3: F-STOP -->
+  <div class="photo-card">
+    <h3>F-Stop</h3>
+    <div class="image-container glass-panel">
+      <img src="assets/img/photo3/normal.webp" class="base-photo" id="base3" alt="Imagine normală">
+      <img src="assets/img/photo3/blur.webp" class="overlay" id="fstopOverlay3" alt="Imagine cu fundal blurat">
+    </div>
+    <div class="controls glass-panel">
+      <label>F-Stop: <span id="fstopValue3">f/4</span></label>
+      <input type="range" id="fstop3" min="0" max="8" step="1" value="3" class="slider">
+    </div>
+    <p class="info-text glass-panel">Imaginea devine mai blurată la valori mici de F-Stop.</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 – Proiect Atestat | Realizat de Goian Bogdan Ștefan | <a href="contact.html" class="footer-link">Contact</a></p>
+</footer>
+
+<script src="js/shared.js"></script>
+<script src="js/simulator.js"></script>
+
+</body>
+</html>

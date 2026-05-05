@@ -1,0 +1,344 @@
+/* css/simulator-avansat.css (Bazat pe codul tău original, care funcționează) */
+
+/* --- MOTORUL DE LAYOUT CARE MERGE --- */
+body.fullscreen-simulator {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: linear-gradient(135deg, #1b1b1b 0%, #2b2b2b 20%, #555 50%, #1b1b1b 100%);
+    background-size: 100% 100%;
+    transition: background-size 0.5s ease;
+}
+
+body.animated-bg .app-wrapper {
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    overflow: hidden; 
+    min-height: 0;
+}
+.simulator-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* FIX: Împărțim ecranul matematic pe mobil ca panoul să nu poată strivi vizorul */
+    grid-template-rows: minmax(0, 1.2fr) minmax(0, 1fr); 
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 1.5rem;
+    padding: 1rem;
+}
+@media (min-width: 1024px) {
+    .simulator-grid { 
+        grid-template-columns: 350px 1fr; 
+        grid-template-rows: 1fr; /* Pe desktop rămâne un singur rând */
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+}
+
+.controls-panel { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.6rem; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+    padding-bottom: 0.75rem; 
+    overflow-y: auto; 
+    overflow-x: hidden; /* FIX: Blochează strict scroll-ul orizontal nedorit */
+    min-height: 0; 
+}
+@media (min-width: 1024px) {
+    .controls-panel { 
+        border-right: 1px solid rgba(255, 255, 255, 0.2); 
+        border-bottom: none; 
+        padding-right: 1.5rem; 
+        padding-bottom: 0; 
+        overflow-x: hidden; /* Aplicăm blocarea și pe desktop */
+    }
+}
+.panel-title { font-size: 1.25rem; font-weight: 700; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 0.5rem; margin: 0; }
+.control-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.control-group.separator { border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 0.5rem; }
+.control-label { font-size: 0.9rem; font-weight: 600; color: rgba(255, 255, 255, 0.9); }
+.radio-group { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.85rem; }
+.radio-group label { display: flex; align-items: center; gap: 0.25rem; cursor: pointer; }
+.toggle-container { display: flex; justify-content: space-between; align-items: center; }
+.snap-button { 
+    width: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 0.5rem; 
+    padding: 0.8rem 0 !important; /* Suprascrie padding-ul orizontal din clasa globală */
+    font-size: 0.95rem; 
+    box-sizing: border-box;
+    margin: 1rem 0 0 0 !important; /* Anulează orice decalaj stânga/dreapta */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* --- STILURI PENTRU MEMORIA TEMPORARĂ (THUMBNAILS) --- */
+.session-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 poze pe rând, exact cum ai cerut */
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.captured-thumb {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s, border-color 0.2s;
+    container-type: inline-size;
+    background: black;
+}
+
+.captured-thumb:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
+    z-index: 2;
+}
+
+/* Suprascriem dimensiunile containerului clonat pentru a umple perfect un thumbnail sau ecranul */
+.captured-thumb .viewfinder-container,
+.photo-modal-body .viewfinder-container {
+    width: 100cqw !important;
+    height: calc(100cqw * (2 / 3)) !important;
+    max-width: none !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+.photo-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    /* Un gradient radial fin în loc de negru solid pentru extra stil */
+    background: radial-gradient(circle at center, rgba(30, 30, 30, 0.85) 0%, rgba(0, 0, 0, 0.98) 100%);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.photo-modal.active {
+    display: flex;
+    /* Fundalul face DOAR fade-in foarte fin, fără scale */
+    animation: modalBgFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes modalBgFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Poza în sine primește animația stylish de intrare */
+.photo-modal.active .photo-modal-body {
+    animation: photoStylishEntry 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes photoStylishEntry {
+    from { 
+        opacity: 0; 
+        transform: scale(0.85) translateY(40px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
+}
+.photo-modal.closing {
+    animation: modalBgFadeOut 0.4s ease-in forwards;
+}
+
+@keyframes modalBgFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.photo-modal.closing .photo-modal-body {
+    animation: photoStylishExit 0.4s cubic-bezier(0.8, 0, 0.8, 0.2) forwards;
+}
+
+@keyframes photoStylishExit {
+    from { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
+    to { 
+        opacity: 0; 
+        transform: scale(0.85) translateY(40px); 
+    }
+}
+.photo-modal-body {
+    position: relative;
+    width: 90vw;
+    max-width: 1200px;
+    aspect-ratio: 3 / 2;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    container-type: inline-size;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.5rem; right: 2.5rem;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 10000;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: color 0.2s;
+}
+.close-modal:hover { color: #ff4757; }
+
+.viewfinder-panel { 
+    container-type: size; /* Permite calcularea CQH și CQW pentru elementele interne */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: rgba(0, 0, 0, 0.2); 
+    border-radius: 1rem; 
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+}
+.viewfinder-container { 
+    position: relative; 
+    /* Formulele magice care forțează perfect aspect ratio 3:2 indiferent de spațiu */
+    width: 100cqw;
+    max-width: calc(100cqh * 1.5);
+    height: calc(100cqw * (2 / 3));
+    max-height: 100cqh;
+    overflow: hidden; 
+    border-radius: 0.75rem; 
+    background: black; 
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.5); 
+    container-type: inline-size; /* Transformă containerul în referință pentru fonturile interne */
+}
+#scene-background, #scene-subject, #brightness-overlay, #pinwheel-main, #pinwheel-trail-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+#scene-background { background-size: cover; background-position: center; transition: all 0.2s; }
+#scene-subject { display: flex; align-items: center; justify-content: center; }
+#brightness-overlay { transition: opacity 0.2s; background-color: black; opacity: 0; }
+@keyframes animate-grain {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-5%, -5%); }
+    40% { transform: translate(-10%, 5%); }
+    60% { transform: translate(5%, -10%); }
+    80% { transform: translate(-5%, 10%); }
+    100% { transform: translate(5%, 5%); }
+}
+
+.noise-overlay { 
+    position: absolute; 
+    top: -50%; left: -50%; 
+    width: 200%; height: 200%; 
+    pointer-events: none; 
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E'); 
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out; 
+    mix-blend-mode: overlay; 
+    z-index: 10;
+    animation: animate-grain 0.3s steps(2) infinite;
+}
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+/* Cqw folosește % din lățimea vizorului pentru a scala elementele impecabil */
+.pinwheel-spin { position: relative; width: 30cqw; height: 30cqw; animation: spin linear infinite; transform-origin: center; }
+.pinwheel-trail-ghost { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; will-change: opacity, transform, filter; transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease; transform-origin: center; }
+#pinwheel-main { transition: filter 0.3s ease; width: 100%; height: 100%; object-fit: contain; }
+.shutter-flash { animation: flash 0.2s ease-out; }
+@keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.camera-ui-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5cqw; display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
+.ui-group { display: flex; align-items: center; gap: 1.5cqw; }
+.ui-panel { display: flex; align-items: center; gap: 1cqw; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px); border-radius: 8px; padding: 1cqw 1.5cqw; color: white; font-weight: 600; font-size: 2.5cqw; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.ui-panel img { width: 3cqw; height: 3cqw; opacity: 0.8; }
+
+.viewfinder-container .exposure-meter { display: flex; flex-direction: column; align-items: center; gap: 0.5cqw; padding: 1cqw 1.5cqw; }
+.viewfinder-container .exposure-meter-track { width: 20cqw; height: 4px; background-color: rgba(255, 255, 255, 0.3); border-radius: 2px; position: relative; }
+.viewfinder-container #exposure-indicator { position: absolute; width: 4px; height: 10px; background-color: white; border-radius: 1px; top: 50%; transform: translateY(-50%); transition: left 0.2s ease-in-out; }
+.viewfinder-container .exposure-labels { width: 22cqw; display: grid; grid-template-columns: repeat(7, 1fr); font-size: 1.5cqw; color: rgba(255, 255, 255, 0.8); }
+.viewfinder-container .exposure-labels span { text-align: center; }
+.viewfinder-container .exposure-labels span:first-child { text-align: left; }
+.viewfinder-container .exposure-labels span:last-child { text-align: right; }
+
+.toggle-label { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
+.toggle-input { opacity: 0; width: 0; height: 0; }
+.toggle-switch { width: 44px; height: 24px; background-color: rgba(255,255,255,0.3); border-radius: 9999px; position: relative; transition: background-color 0.2s; }
+.toggle-switch::before { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background-color: white; border-radius: 50%; transition: transform 0.2s; }
+.toggle-input:checked + .toggle-switch { background-color: #38bdf8; }
+.toggle-input:checked + .toggle-switch::before { transform: translateX(20px); }
+
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; background: transparent; cursor: pointer; }
+input[type=range]:focus { outline: none; }
+input[type=range]::-webkit-slider-runnable-track { height: 6px; background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -5px; width: 16px; height: 16px; background: #ffffff; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+input[type=range]::-moz-range-track { height: 6px; background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+input[type=range]::-moz-range-thumb { width: 16px; height: 16px; background: #ffffff; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+input[type="range"]:disabled::-webkit-slider-thumb, input[type="range"]:disabled::-moz-range-thumb { background-color: #94a3b8; }
+/* ADAUGĂ ASTA LA FINALUL FIȘIERULUI CSS */
+
+/* --- STILURI PENTRU EXPOZIMETRUL DIN PANOUL DE CONTROL --- */
+.controls-panel .exposure-meter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem; /* Spațiu mic între bară și etichete */
+    padding: 0.5rem 0; /* Spațiere verticală */
+}
+
+.controls-panel .exposure-meter-track {
+    width: 100%; /* Ocupă toată lățimea disponibilă în panou */
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    position: relative;
+}
+
+/* Regulile pentru indicator rămân valabile, nu trebuie adăugat nimic nou */
+
+.controls-panel .exposure-labels {
+    width: 100%; /* Se aliniază perfect cu bara de deasupra */
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* FIX NUCLEAR: Oprește absolut orice animație de pe orice strat din pozele făcute */
+.captured-thumb .noise-overlay,
+.captured-thumb .noise-overlay svg,
+.photo-modal-body .noise-overlay,
+.photo-modal-body .noise-overlay svg {
+    animation: none !important;
+    -webkit-animation: none !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+}
+

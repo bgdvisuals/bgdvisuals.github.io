@@ -1,0 +1,71 @@
+<!-- galerie.html (VERSIUNEA FINALĂ ȘI CORECTĂ) -->
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerie Foto</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="css/shared.css">
+<link rel="stylesheet" href="css/galerie.css"> 
+<link rel="icon" type="image/x-icon" href="/assets/icons/camera.ico">
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1>Galerie Foto</h1>
+      <nav id="navMenu">
+        <a href="index.html" class="nav-link">Acasă</a>
+        <a href="alege-simulator.html" class="nav-link">Simulator</a>
+        <a href="galerie.html" class="nav-link">Galerie</a>
+        <a href="teorie.html" class="nav-link">Teorie</a>
+      </nav>
+      <div class="hamburger" id="hamburger">&#9776;</div>
+    </div>
+  </header>
+
+  <main class="gallery-section">
+    <h2 class="gallery-title">Explorare Vizuală</h2>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><figure><img src="assets/img/image1.webp" alt="..."><figcaption>In August 2025 am fost la un eveniment numit Grand Rally Tour si am capturat pozele urmatoare</figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image2.webp" alt="..."><figcaption></figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image3.webp" alt="..."><figcaption></figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image4.webp" alt="..."><figcaption>De asemenea am capturat si niste imagini cu masini de epoca</figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image5.webp" alt="..."><figcaption></figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image6.webp" alt="..."><figcaption>Si de la Salonul Auto Bucuresti</figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image7.webp" alt="..."><figcaption></figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image8.webp" alt="..."><figcaption>Si de la un eveniment numit Dropdown care prezinta masini sport si modificate</figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image9.webp" alt="..."><figcaption></figcaption></figure></div>
+        <div class="swiper-slide"><figure><img src="assets/img/image10.webp" alt="..."><figcaption>Si cele mai recente poze capturate</figcaption></figure></div>
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 – Proiect Atestat | Realizat de Goian Bogdan Ștefan | <a href="contact.html" class="footer-link">Contact</a></p>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiperContainer = document.querySelector('.swiper');
+    const swiper = new Swiper(swiperContainer, {
+      effect: 'coverflow', grabCursor: true, centeredSlides: true, slidesPerView: 'auto', loop: true,
+      /* Fix: Disabled slideShadows to massively boost performance */
+      coverflowEffect: { rotate: 50, stretch: 0, depth: 100, modifier: 1, slideShadows: false, },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev', },
+      on: {
+        slideChangeTransitionStart: function () { swiperContainer.classList.add('swiper-sliding'); },
+        slideChangeTransitionEnd: function () { swiperContainer.classList.remove('swiper-sliding'); },
+      },
+    });
+  });
+</script>
+</body>
+</html>

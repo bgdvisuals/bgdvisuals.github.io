@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teorie - Proiect Atestat Fotografie</title>
+<link rel="icon" type="image/x-icon" href="/assets/icons/camera.ico">
+<link rel="stylesheet" href="css/shared.css">
+<link rel="stylesheet" href="css/teorie.css">
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <h1>Teorie</h1>
+    <nav id="navMenu">
+      <a href="index.html" class="nav-link">Acasă</a>
+      <a href="alege-simulator.html" class="nav-link">Simulator</a>
+      <a href="galerie.html" class="nav-link">Galerie</a>
+      <a href="teorie.html" class="nav-link">Teorie</a>
+    </nav>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+  </div>
+</header>
+
+<main class="teorie-section">
+  <div class="teorie-container">
+    
+    <!-- Introducere -->
+    <div class="glass-panel teorie-card fade-in-up">
+      <h2>
+        <span>Triunghiul Expunerii</span>
+        <span class="expand-icon">&#x25BC;</span>
+      </h2>
+      <div class="teorie-summary">
+        <p>Orice fotografie depinde de trei elemente principale care controlează cantitatea de lumină ce ajunge la senzorul camerei: <strong>Timpul de Expunere (Shutter Speed)</strong>, <strong>Diafragma (Aperture / F-Stop)</strong> și <strong>Sensibilitatea (ISO)</strong>. Echilibrul perfect dintre acestea determină expunerea corectă a imaginii.</p>
+      </div>
+      <div class="teorie-details">
+        <div class="teorie-details-inner">
+          <p><strong>Detalii Avansate:</strong> Acest echilibru funcționează ca un sistem de vase comunicante. Dacă modifici un parametru pentru un efect vizual (ex: blurarea fundalului), trebuie să compensezi ajustând celălalt parametru pentru a menține aceeași expunere. De exemplu, un timp de expunere mai scurt va necesita o diafragmă mai deschisă sau un ISO mai mare.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shutter Speed -->
+    <div class="glass-panel teorie-card fade-in-up" style="animation-delay: 0.1s;">
+      <h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <img src="assets/icons/shutter.svg" alt="Shutter" class="teorie-icon"> 
+          <span>Shutter Speed (Timpul de Expunere)</span>
+        </div>
+        <span class="expand-icon">&#x25BC;</span>
+      </h2>
+      <div class="teorie-summary">
+        <p>Reprezintă durata în care obturatorul camerei stă deschis pentru a lăsa lumina să lovească senzorul. Se măsoară în fracțiuni de secundă (ex: 1/125s) sau secunde întregi (ex: 2").</p>
+        <ul>
+          <li><strong>Timp scurt (ex: 1/1000s):</strong> "Îngheață" complet mișcarea (fotografie sportivă, mașini în mișcare). Lasă mai puțină lumină să intre.</li>
+          <li><strong>Timp lung (ex: 1/2s):</strong> Creează efectul de "motion blur". Lasă foarte multă lumină să intre și necesită de obicei un trepied.</li>
+        </ul>
+      </div>
+      <div class="teorie-details">
+        <div class="teorie-details-inner">
+          <p><strong>Sfat Practic (Regula distanței focale):</strong> Pentru a evita pozele mișcate din cauza tremurului mâinilor, timpul tău de expunere nu ar trebui să fie mai lung decât `1 / distanța focală`. De exemplu, dacă folosești un obiectiv de 50mm, încearcă să fotografiezi cu cel puțin 1/50s!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aperture -->
+    <div class="glass-panel teorie-card fade-in-up" style="animation-delay: 0.2s;">
+      <h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <img src="assets/icons/aperture.svg" alt="Aperture" class="teorie-icon"> 
+          <span>F-Stop / Diafragma (Aperture)</span>
+        </div>
+        <span class="expand-icon">&#x25BC;</span>
+      </h2>
+      <div class="teorie-summary">
+        <p>Reprezintă deschiderea obiectivului, controlând cantitatea fizică de lumină care trece prin lentilă. Se măsoară în valori "f" (ex: f/1.8, f/8, f/22).</p>
+        <ul>
+          <li><strong>F-Stop mic (ex: f/1.8):</strong> Deschidere foarte mare. Creează un fundal puternic estompat (Depth of Field îngust), ideal pentru portrete.</li>
+          <li><strong>F-Stop mare (ex: f/16):</strong> Deschidere foarte mică. Menține totul în claritate de la prim-plan până la fundal, ideal pentru peisaje.</li>
+        </ul>
+      </div>
+      <div class="teorie-details">
+        <div class="teorie-details-inner">
+          <p><strong>Sfat Practic (Claritatea maximă):</strong> Deși o diafragmă de f/22 menține o arie imensă focalizată, ea declanșează un fenomen optic numit "difracție" care face imaginea ușor încețoșată. Majoritatea obiectivelor ating claritatea absolută (sweet spot-ul) dacă sunt închise cu 2-3 stopuri (de obicei în zona f/5.6 – f/8).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISO -->
+    <div class="glass-panel teorie-card fade-in-up" style="animation-delay: 0.3s;">
+      <h2>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <img src="assets/icons/iso.svg" alt="ISO" class="teorie-icon"> 
+          <span>Sensibilitatea ISO</span>
+        </div>
+        <span class="expand-icon">&#x25BC;</span>
+      </h2>
+      <div class="teorie-summary">
+        <p>Măsoară sensibilitatea senzorului digital la lumină. Valoarea de bază este de obicei ISO 100.</p>
+        <ul>
+          <li><strong>ISO mic (100 - 400):</strong> Oferă o imagine extrem de clară, curată, fără "zgomot de imagine". Folosit pe timp de zi.</li>
+          <li><strong>ISO mare (1600 - 6400+):</strong> Permite fotografierea pe timp de noapte, dar introduce o granulație (grain) vizibilă care scade calitatea imaginii.</li>
+        </ul>
+      </div>
+      <div class="teorie-details">
+        <div class="teorie-details-inner">
+          <p><strong>Sfat Practic:</strong> Creșterea valorii ISO ar trebui să fie întotdeauna ultima ta soluție! Ajustează-l doar atunci când ai deschis deja diafragma la maximum și ai redus timpul de expunere la viteza minimă de siguranță pentru a ține camera din mână.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  // Adăugăm logica de expansiune
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.teorie-card').forEach(card => {
+      card.addEventListener('click', () => {
+        // Închidem celelalte carduri dacă dorim (opțional)
+        // document.querySelectorAll('.teorie-card').forEach(c => {
+        //   if (c !== card) c.classList.remove('expanded');
+        // });
+        
+        card.classList.toggle('expanded');
+      });
+    });
+  });
+</script>
+
+<footer>
+  <p>&copy; 2026 – Proiect Atestat | Realizat de Goian Bogdan Ștefan | <a href="contact.html" class="footer-link">Contact</a></p>
+</footer>
+
+<script src="js/shared.js"></script>
+</body>
+</html>

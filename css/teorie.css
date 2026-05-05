@@ -1,0 +1,156 @@
+/* css/teorie.css */
+
+.teorie-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  width: 100%;
+}
+
+.teorie-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.teorie-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* Fix GPU Mobile Bug */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.teorie-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.teorie-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  font-size: 1.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 1rem;
+}
+
+.teorie-icon {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.teorie-card p {
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+}
+
+.teorie-card ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+}
+
+.teorie-card li {
+  margin-bottom: 0.8rem;
+}
+
+.teorie-card strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Animație de intrare fluidă */
+.fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ajustare pentru ecrane mai mici (mobile) */
+@media (max-width: 768px) {
+  .teorie-card {
+    padding: 1.5rem;
+  }
+  .teorie-card h2 {
+    font-size: 1.3rem;
+  }
+}
+/* --- EXTINDERE CARDURI (ACCORDION) --- */
+.teorie-card {
+  cursor: pointer; /* Indică utilizatorului că poate da click */
+}
+
+.teorie-card h2 {
+  justify-content: space-between; /* Asigură că săgeata se duce pe dreapta */
+}
+
+.expand-icon {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Săgeata se rotește când cardul e deschis */
+.teorie-card.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+/* Folosim CSS Grid pentru a anima înălțimea fluid și natural de la 0 la auto */
+.teorie-details {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.teorie-details-inner {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Starea activă a cardului extins */
+.teorie-card.expanded .teorie-details {
+  grid-template-rows: 1fr;
+}
+
+.teorie-card.expanded .teorie-details-inner {
+  opacity: 1;
+  padding-top: 1.2rem;
+  margin-top: 1.2rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.teorie-details-inner p {
+  color: var(--theme-color, #8ee1ff); /* O nuanță diferită sau culoarea temei */
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  font-style: italic;
+}

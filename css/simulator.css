@@ -1,0 +1,80 @@
+/* css/simulator.css (Varianta finală și corectă) */
+
+.simulator-section {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Am mărit spațiul între carduri */
+  align-items: center;
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Stilul general pentru PANOURILE DE STICLĂ */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-radius: 20px;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+  width: 85%;
+  max-width: 550px; /* mai compact pe orizontală */
+  margin: 0.5rem auto;
+}
+
+
+/* Stilul SPECIFIC pentru containerul imaginii */
+.image-container {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  padding: 1rem; /* Padding interior pentru imagine */
+}
+
+/* Regulile pentru imagini (centrare și suprapunere) */
+.base-photo, .overlay {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.overlay {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: opacity;
+}
+
+/* ÎNLOCUIEȘTE REGULA PENTRU .CONTROLS ÎN CSS/SIMULATOR.CSS */
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Am scos 'flex-grow: 1' care îl făcea să se întindă inutil */
+}
+.info-text {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Restul stilurilor */
+.slider-wrapper { position: relative; width: 100%; display: flex; align-items: center; }
+.slider { -webkit-appearance: none; width: 100%; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.2); outline: none; position: relative; z-index: 2; }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: transparent; cursor: pointer; border: none; }
+.slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: transparent; cursor: pointer; border: none; }
+.fake-thumb { position: absolute; top: 50%; left: 0; width: 20px; height: 20px; border-radius: 50%; background: rgba(255, 255, 255, 0.8); transform: translateY(-50%); pointer-events: none; z-index: 3; transition: left 0.7s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 0 5px rgba(0,0,0,0.3); }
+.switch { display: flex; justify-content: space-between; align-items: center; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider-toggle { position: relative; width: 50px; height: 24px; background: rgba(255, 255, 255, 0.2); border-radius: 24px; transition: background 0.4s; flex-shrink: 0; }
+.slider-toggle:before { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: 0.4s; }
+input:checked + .slider-toggle:before { transform: translateX(26px); }
+input:checked + .slider-toggle { background: rgba(0, 200, 255, 0.4); }

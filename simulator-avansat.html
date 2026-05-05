@@ -1,0 +1,113 @@
+<!-- simulator-avansat.html -->
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulator Foto Avansat</title>
+    <link rel="icon" type="image/x-icon" href="/assets/icons/camera.ico">
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/simulator-avansat.css">
+</head>
+<body class="fullscreen-simulator">
+
+<div class="app-wrapper">
+    <!-- Header-ul standard al proiectului -->
+    <header>
+      <div class="header-content">
+        <h1>Simulator Avansat</h1>
+        <nav id="navMenu">
+          <a href="index.html" class="nav-link">Acasă</a>
+          <a href="alege-simulator.html" class="nav-link">Simulator</a>
+          <a href="galerie.html" class="nav-link">Galerie</a>
+          <a href="teorie.html" class="nav-link">Teorie</a>
+        </nav>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+      </div>
+    </header>
+
+    <!-- Conținutul principal (structura ta originală, care funcționează) -->
+    <div class="main-content">
+        <main class="simulator-grid">
+            <!-- Panoul de Control (Stânga) -->
+            <div class="controls-panel">
+                <h2 class="panel-title">Setări Cameră</h2>
+
+                <div class="control-group">
+                    <label class="control-label">Mod de Fotografiere</label>
+                    <div class="radio-group" id="mode-selector">
+                        <label><input type="radio" name="mode" value="M" checked><span>Manual (M)</span></label>
+                        <label><input type="radio" name="mode" value="Av"><span>Prioritate Diafragmă (Av)</span></label>
+                        <label><input type="radio" name="mode" value="Tv"><span>Prioritate Timp (Tv)</span></label>
+                    </div>
+                </div>
+                
+                <div class="control-group separator">
+                     <div class="toggle-container">
+                        <label for="nd-filter" class="control-label">Filtru ND (10-Stop)</label>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="nd-filter" class="toggle-input">
+                            <span class="toggle-switch"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group"><label for="aperture" class="control-label">Diafragmă (Aperture)</label><input id="aperture" type="range" min="0" max="8" value="4" step="1"></div>
+                <div class="control-group"><label for="shutter" class="control-label">Timp de Expunere</label><input id="shutter" type="range" min="0" max="12" value="7" step="1"></div>
+                <div class="control-group"><label for="iso" class="control-label">ISO</label><input id="iso" type="range" min="0" max="6" value="2" step="1"></div>
+                
+                <button id="snap-photo" class="glass-button snap-button">
+                    <img src="assets/icons/camera.svg" alt="Camera" style="width: 20px; height: 20px;">
+                    <span>Fă o fotografie</span>
+                </button>
+                <div id="session-gallery" class="session-gallery"></div>
+            </div>
+
+            <!-- Panoul Vizor (Dreapta) -->
+            <div class="viewfinder-panel">
+                <div id="viewfinder" class="viewfinder-container">
+                    <div id="scene-background" style="background-image: url('assets/img/simulator_bg.webp');"></div>
+                    <div id="scene-subject">
+                        <div id="pinwheel" class="pinwheel-spin">
+                            <div id="pinwheel-trail-container"></div>
+                            <img id="pinwheel-main" src="assets/img/simulator_wheel.webp" alt="Roată care se învârte"/>
+                        </div>
+                    </div>
+
+                    <div id="brightness-overlay"></div>
+                    <div id="noise-overlay" class="noise-overlay"></div>
+
+                    <div class="camera-ui-overlay">
+                        <div class="ui-group">
+                            <div class="ui-panel"><img src="assets/icons/shutter.svg" alt="Icon"><span id="shutter-value">1/125s</span></div>
+                            <div class="ui-panel"><img src="assets/icons/aperture.svg" alt="Icon"><span id="aperture-value">f/5.6</span></div>
+                        </div>
+                        <div class="ui-group">
+                             <div class="ui-panel exposure-meter">
+                                 <div class="exposure-meter-track"><div id="exposure-indicator"></div></div>
+                                 <div class="exposure-labels"><span>-3</span><span>-2</span><span>-1</span><span>0</span><span>+1</span><span>+2</span><span>+3</span></div>
+                             </div>
+                            <div class="ui-panel"><img src="assets/icons/iso.svg" alt="Icon"><span id="iso-value">ISO 400</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Footer-ul standard al proiectului -->
+    <footer>
+        <p>&copy; 2026 – Proiect Atestat | Realizat de Goian Bogdan Ștefan | <a href="contact.html" class="footer-link">Contact</a></p>
+    </footer>
+</div>
+<div id="photo-modal" class="photo-modal">
+    <span id="close-modal" class="close-modal">&times;</span>
+    <div id="photo-modal-body" class="photo-modal-body"></div>
+</div>
+
+<script src="js/shared.js"></script>
+<script src="js/simulator-avansat.js"></script>
+
+</body>
+</html>

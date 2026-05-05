@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acasă - Fotografie</title>
+<link rel="icon" type="image/x-icon" href="/assets/icons/camera.ico">
+<link rel="stylesheet" href="css/shared.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <h1>Proiect Atestat Fotografie</h1>
+    <nav id="navMenu">
+      <a href="index.html" class="nav-link">Acasă</a>
+      <a href="alege-simulator.html" class="nav-link">Simulator</a>
+      
+      <a href="galerie.html" class="nav-link">Galerie</a>
+      <a href="teorie.html" class="nav-link">Teorie</a>
+    </nav>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+  </div>
+</header>
+
+<main class="home-section">
+  <section class="intro">
+    <div class="glass-panel">
+      <h2>Bun venit în lumea fotografiei</h2>
+      <p>Explorează cum parametrii shutter speed, ISO și f-stop influențează imaginile. Experimentează direct în simulatorul interactiv.</p>
+      
+      <!-- AICI ESTE BUTONUL LIPSĂ, ACUM PREZENT ȘI CORECT -->
+      <a href="alege-simulator.html" class="glass-button large open-choice-modal">Începe explorarea</a>
+    
+    </div>
+  </section>
+</main>
+
+<div class="corner-toggle-container">
+  <span class="toggle-text">Fundal Animat</span>
+  <label class="theme-toggle-label">
+    <input type="checkbox" id="bgAnimationToggle" class="theme-toggle-input">
+    <span class="theme-toggle-switch"></span>
+  </label>
+</div>
+
+<footer>
+  <p>&copy; 2026 – Proiect Atestat | Realizat de Goian Bogdan Ștefan | <a href="contact.html" class="footer-link">Contact</a></p>
+</footer>
+
+<script src="js/shared.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const bgToggle = document.getElementById('bgAnimationToggle');
+    if (bgToggle) {
+      bgToggle.checked = getCookie('bgAnimated') === 'true';
+      
+      bgToggle.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          document.body.classList.add('animated-bg');
+          setCookie('bgAnimated', 'true', 365);
+        } else {
+          document.body.classList.remove('animated-bg');
+          setCookie('bgAnimated', 'false', 365);
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>

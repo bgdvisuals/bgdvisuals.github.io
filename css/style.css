@@ -46,7 +46,7 @@
 }
 .corner-toggle-container {
   position: absolute !important;
-  bottom: 4rem;
+  bottom: 2rem;
   right: 2rem;
   display: flex;
   align-items: center;
@@ -58,19 +58,13 @@
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  z-index: 10; 
+  z-index: 10;
 }
 
 .corner-toggle-container span.toggle-text {
   color: white;
   font-weight: 500;
   font-size: 1rem;
-}
-
-.corner-toggle-container span.toggle-text {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
-  font-size: 0.95rem;
 }
 
 .theme-toggle-label {
@@ -118,7 +112,9 @@
 
 @media (max-width: 768px) {
   .corner-toggle-container {
-    bottom: 5rem; 
-    right: 1.5rem;
+    /* Scoatem butonul din starea de plutire și îl așezăm în pagină sub panou */
+    position: static !important;
+    align-self: center;
+    margin: 1rem auto 2rem auto;
   }
 }

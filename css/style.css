@@ -45,8 +45,8 @@
   transform: translateY(-2px); 
 }
 .corner-toggle-container {
-  position: fixed !important;
-  bottom: 2rem;
+  position: absolute !important;
+  bottom: 4rem;
   right: 2rem;
   display: flex;
   align-items: center;
@@ -58,12 +58,7 @@
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  z-index: 9999;
-  
-
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  will-change: transform;
+  z-index: 10; 
 }
 
 .corner-toggle-container span.toggle-text {
